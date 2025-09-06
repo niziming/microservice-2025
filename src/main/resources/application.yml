@@ -2,3 +2,26 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: microservice-2025
+
+
+# Knife4j 核心配置（指定扫描的Controller路径）
+knife4j:
+  enable: true  # 开启Knife4j功能
+  openapi:
+    title: 用户服务API文档
+    description: 用于管理用户信息的所有接口
+    version: 1.0.0
+    # 分组配置（可针对不同模块配置不同扫描规则）
+    group:
+      default:  # 默认分组
+        # 关键配置：指定需要扫描的Controller接口路径
+        # 这里表示扫描所有以 /api/ 开头的接口（对应Controller中@RequestMapping("/api/xxx")的接口）
+        paths-to-match:
+          - /**
+        # 可选：排除不需要扫描的路径
+        paths-to-exclude:
+          - /error/**
+          - /actuator/**
