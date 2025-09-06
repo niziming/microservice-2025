@@ -11,6 +11,7 @@
     <packaging>jar</packaging>
 
     <artifactId>springboot</artifactId>
+
     <dependencies>
         <!-- Knife4j 依赖管理 -->
         <dependency>
@@ -28,17 +29,18 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
-
-
 </project>
