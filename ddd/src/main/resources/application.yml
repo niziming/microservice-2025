@@ -1,0 +1,92 @@
+# Spring Boot 3 + MyBatis-Plus 应用配置文件 (YAML格式)
+
+# 应用基本配置
+spring:
+  application:
+    name: ddd
+  # 数据源配置 (H2内存数据库)
+  datasource:
+    url: jdbc:h2:mem:ecommerce
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+
+  # H2控制台配置
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # SQL初始化配置
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+  # Jackson时间格式配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# MyBatis-Plus配置
+mybatis-plus:
+  # Mapper XML文件位置
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # 实体类别名包路径
+  type-aliases-package: cn.zm.ddd.infrastructure.persistence
+  
+  # MyBatis配置
+  configuration:
+    # 下划线转驼峰命名
+    map-underscore-to-camel-case: true
+    # 禁用缓存
+    cache-enabled: false
+    # SQL日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  
+  # 全局配置
+  global-config:
+    db-config:
+      # 逻辑删除字段名
+      logic-delete-field: deleted
+      # 逻辑删除值
+      logic-delete-value: 1
+      # 逻辑未删除值
+      logic-not-delete-value: 0
+
+# 日志配置
+logging:
+  level:
+    # 应用包日志级别
+    com.ddd.ecommerce: DEBUG
+    # Spring Web日志级别
+    org.springframework.web: INFO
+    # MyBatis-Plus Mapper日志级别
+    com.ddd.ecommerce.infrastructure.mapper: DEBUG
+
+# Knife4j配置
+knife4j:
+  # 开启Knife4j增强模式
+  enable: true
+  # 开启生产环境屏蔽
+  production: false
+  # 基础认证功能
+  basic:
+    enable: false
+  # 自定义文档
+  documents:
+    - group: DDD电商系统API
+      name: 接口文档
+      locations: classpath:markdown/*
+  # 更多配置参考官方文档
