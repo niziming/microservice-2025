@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: kafka
+  kafka:
+    # 连接地址 (对应 docker-compose 里的外部端口)
+    bootstrap-servers: localhost:9093
+    # --- 生产者配置 ---
+    producer:
+      # 批量大小：从默认 16KB 增加到 32KB
+      batch-size: 32768
+      # 等待时间：默认是 0 (立即发送)。改成 5ms，表示“攒够 32KB 或 等待 ms”再发
+      # 这对于高并发场景能极大提升吞吐量
+      properties:
+        linger.ms: 1000
+      # 发生重试的次数
+      retries: 3
+      # 序列化方式：Key 用 String，Value 用 String (如果是对象，通常转成 JSON String 发送)
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    # --- 消费者配置 ---
+    consumer:
+      # 默认消费者组 ID (非常重要)
+      group-id: my-app-group
+      # 序列化方式：必须与生产者对应
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 如果没有 offset (比如新消费者)，从哪里开始读？earliest=从头开始, latest=从最新的开始
+      auto-offset-reset: latest
+      # 关闭自动提交
+      # 风险：消费者收到消息后，还没来得及处理（比如存数据库），机器断电了。
+      # 但因为已经自动提交了 Offset，Kafka 以为你处理完了。重启后，这条消息就丢了。
+      # 生产环境最佳实践：手动提交 (Manual Ack)
+      enable-auto-commit: false
+      # 每次最多拉取 500 条
+      max-poll-records: 500
+    listener:
+      # 消费端确认模式：MANUAL_IMMEDIATE (手动调用 ack() 后立即提交)
+      ack-mode: manual_immediate
+      # 开启批量监听
+      type: batch
+
+
+server:
+  port: 8080

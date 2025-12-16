@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # 指向授权服务器暴露公钥的端点
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
+logging:
+  level:
+    cn.zm: debug
+    org.springframework.web: debug
+    org.springframework.security: debug
+    org.springframework.security.oauth2: debug

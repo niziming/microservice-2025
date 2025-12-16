@@ -1,0 +1,41 @@
+# 添加或合并到你现有的 server 配置下
+server:
+  port: 8080 # 这是你已有的配置
+  servlet:
+    session:
+      cookie:
+        # 明确设置 SameSite 策略为 "Lax"。
+        # 虽然这通常是默认值，但明确配置可以确保覆盖任何其他可能存在的默认设置。
+        # "Lax" 策略在大多数顶层导航重定向中允许发送 Cookie。
+        same-site: lax
+spring:
+  security:
+    oauth2:
+      client:
+        # 客户端注册信息
+        registration:
+          oidc-client: # 这个名字必须和授权服务器中配置的 redirect-uri 中的路径一致
+            provider: spring
+            client-id: oidc-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, api.read
+            client-name: My Awesome App
+        # 提供商信息
+        provider:
+          spring:
+            # 授权服务器的地址，Spring 会自动发现其他端点（如 token, jwks 等）
+            issuer-uri: http://localhost:9000
+  # --- 添加以下 Spring Session 的配置 ---
+  session:
+    store-type: jdbc # 告知 Spring Session 使用 JDBC 来存储会话
+    jdbc:
+      # 在应用启动时，自动创建存储 Session 所需的数据表
+      initialize-schema: always
+logging:
+  level:
+    cn.zm: debug
+    org.springframework.web: debug
+    org.springframework.security: debug
+    org.springframework.security.oauth2: debug

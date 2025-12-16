@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Messages</title>
+</head>
+<body>
+<h1>Messages from Resource Server</h1>
+<ul>
+    <li th:each="message : ${messages}" th:text="${message}"></li>
+</ul>
+<p><a href="/">Back to Home</a></p>
+</body>
+</html>

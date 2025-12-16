@@ -1,0 +1,29 @@
+server:
+  port: 8082 # 使用一个新的端口 8082，避免冲突
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          # --- 1. 配置 Google 登录 ---
+          google:
+            # 替换成您在 Google Cloud Console 中获取的值
+            client-id: YOUR_GOOGLE_CLIENT_ID
+            client-secret: YOUR_GOOGLE_CLIENT_SECRET
+            scope: openid, profile, email
+          
+          # --- 2. 配置我们自己的授权服务器 ---
+          # 我们仍然需要它，以便用 Google 的身份去换取能访问内部资源的令牌
+          oidc-client: # 这个名字必须和授权服务器中配置的 redirect-uri 中的路径一致
+            provider: spring
+            client-id: oidc-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, api.read
+            client-name: My Awesome App
+        provider:
+          # 定义我们自己的授权服务器提供商信息
+          internal-provider:
+            issuer-uri: http://localhost:9000
