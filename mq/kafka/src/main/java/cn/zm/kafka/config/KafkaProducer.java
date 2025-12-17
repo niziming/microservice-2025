@@ -22,7 +22,7 @@ public class KafkaProducer {
         // 1. 将对象转为 JSON 字符串
         String jsonMessage = JSON.toJSONString(event);
 
-        log.info("准备发送消息: {}", jsonMessage);
+        System.out.printf("准备发送消息: %s", jsonMessage);
 
         // 2. 发送消息 (Topic, Key, Value)
         // Key 设置为 userId，可以保证同一个用户的消息进入同一个分区，保证顺序

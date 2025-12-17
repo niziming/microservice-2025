@@ -24,7 +24,7 @@ public class KafkaConsumer {
     @KafkaListener(topics = TOPIC_NAME, groupId = GROUP_ID)
     public void handleUserRegister(List<String> msgs, Acknowledgment ack) {
         // 1. 将 JSON 字符串转回对象
-        log.info("消费者收到消息 -> 批量用户数据:{} ", JSONUtil.toJsonPrettyStr(msgs));
+        System.out.printf("消费者收到消息 -> 批量用户数据: %s ", JSONUtil.toJsonPrettyStr(msgs));
         // --- 模拟异常场景 ---
         // if (event.getUsername().contains("error")) {
         //     log.error("检测到非法用户，准备抛出异常触发重试...");
@@ -36,18 +36,18 @@ public class KafkaConsumer {
 
         // 3. 业务成功后，手动提交 Offset
         ack.acknowledge();
-        log.info("Offset 已提交");
+        System.out.println("Offset 已提交");
     }
 
     private void sendWelcomeEmail(List<String> msgs) {
-        log.info("正在给邮箱 {} 发送欢迎邮件...", msgs);
+        System.out.printf("正在给邮箱 %s 发送欢迎邮件...", msgs);
         // 模拟耗时
         try {
             Thread.sleep(100);
             List<UserRegisterEvent> collect = msgs.stream().map(msg -> JSON.parseObject(msg, UserRegisterEvent.class)).collect(Collectors.toList());
-            log.info("批量用户数据:{} ", JSONUtil.toJsonPrettyStr(collect));
+            System.out.printf("批量用户数据:%s ", JSONUtil.toJsonPrettyStr(collect));
         } catch (InterruptedException e) {
         }
-        log.info("邮件发送成功！");
+        System.out.println("邮件发送成功！");
     }
 }

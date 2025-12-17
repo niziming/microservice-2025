@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: rocketmq-demo
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    # 生产者组名（必填）
+    group: my-producer-group
+    # 发送超时时间（毫秒）
+    send-message-timeout: 3000

@@ -11,17 +11,7 @@
     <artifactId>kafka</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.8.25</version>
-            <optional>true</optional>
-        </dependency>
+
 
         <!-- Spring Boot 集成 Kafka 的核心依赖 -->
         <dependency>
@@ -29,22 +19,6 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
-        <!-- 常用工具库 (可选，为了用 @Data 和 JSON 处理) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-            <version>2.0.43</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
     </dependencies>
 

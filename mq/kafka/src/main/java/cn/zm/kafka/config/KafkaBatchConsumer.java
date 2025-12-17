@@ -22,23 +22,23 @@ public class KafkaBatchConsumer {
     public void handleUserBatchRegister(List<String> msgs, Acknowledgment ack) {
         // 1. 将 JSON 字符串转回对象
 
-        log.info("消费者收到消息 -> 用户ID: {}, 用户名: {}", JSONUtil.toJsonPrettyStr(msgs));
+        System.out.printf("消费者收到消息 -> 用户ID: %s", JSONUtil.toJsonPrettyStr(msgs));
 
         // 2. 模拟业务逻辑
         sendWelcomeEmail("event.getEmail()");
 
         // 3. 业务成功后，手动提交 Offset
         ack.acknowledge();
-        log.info("Offset 已提交");
+        System.out.println("Offset 已提交");
     }
 
     private void sendWelcomeEmail(String email) {
-        log.info("正在给邮箱 {} 发送欢迎邮件...", email);
+        System.out.printf("正在给邮箱 %s 发送欢迎邮件...", email);
         // 模拟耗时
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
         }
-        log.info("邮件发送成功！");
+        System.out.println("邮件发送成功！");
     }
 }

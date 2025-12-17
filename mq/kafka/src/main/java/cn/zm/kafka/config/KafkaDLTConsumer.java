@@ -42,11 +42,11 @@ public class KafkaDLTConsumer {
 
     private void saveToErrorLogDatabase(String message, String reason) {
         // 模拟入库：INSERT INTO error_msg_table ...
-        log.info(">> 已将异常消息存入数据库，等待人工排查");
+        System.out.println(">> 已将异常消息存入数据库，等待人工排查");
     }
 
     private void sendAlertToAdmin(String message) {
         // 模拟发送报警
-        log.info(">> 已发送钉钉/邮件报警通知");
+        System.out.println(">> 已发送钉钉/邮件报警通知");
     }
 }
