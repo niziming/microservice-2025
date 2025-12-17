@@ -14,14 +14,14 @@ public class TopicExchangeConsumer {
     @RabbitListener(queues = QUEUE_ERROR)
     private void error(String msg) {
         System.out.println("================");
-        System.out.printf(">>>>>> %s 消费者订阅报错信息: %s", this.getClass().getSimpleName(), msg);
+        System.out.printf(">>>>>> %s 消费者订阅报错信息: %s \n", this.getClass().getSimpleName(), msg);
         System.out.println("================");
     }
 
     @RabbitListener(queues = QUEUE_ALL)
     private void all(String msg) {
         System.out.println("================");
-        System.out.printf(">>>>>> %s 消费者订阅所有信息: %s", this.getClass().getSimpleName(), msg);
+        System.out.printf(">>>>>> %s 消费者订阅所有信息: %s \n", this.getClass().getSimpleName(), msg);
         System.out.println("================");
     }
 }
