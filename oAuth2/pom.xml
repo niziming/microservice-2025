@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>OAuth2</artifactId>
+    <artifactId>oAuth2</artifactId>
 
     <modules>
         <module>authorization-server</module>

@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>ddd</module>
-        <module>OAuth2</module>
+        <module>oAuth2</module>
         <module>mq</module>
     </modules>
 

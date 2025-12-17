@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.zm</groupId>
-        <artifactId>OAuth2</artifactId>
+        <artifactId>oAuth2</artifactId>
         <version>${revision}</version>
     </parent>
 
