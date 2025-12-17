@@ -1,0 +1,9 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    # 开启确认机制（进阶实战会用到，先配上）
+    publisher-confirm-type: correlated
+    publisher-returns: true
